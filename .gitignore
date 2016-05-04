@@ -1,4 +1,5 @@
 # These are all generated 
+coverage
 node_modules/
 typings/
 docs/

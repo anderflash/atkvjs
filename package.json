@@ -3,6 +3,9 @@
   "version": "0.0.1",
   "description": "Computer Graphics, Computer Vision and Image Processing JS/TS library",
   "repository": "https://github.com/anderflash/atkvjs",
+  "license": "GPL-3.0",
+  "author": "Anderson Carlos Moreira Tavares <acmt@outlook.com>",
+  "main": "dist/atkv.js",
   "scripts": {
     "start": "tsc && concurrently \"npm run tsc:w\" \"npm run lite\" ",
     "lite": "lite-server",
@@ -10,14 +13,15 @@
     "tsc": "tsc",
     "tsc:w": "tsc -w",
     "tsc:t": "tsc --p \"tsconfig.tests.json\"",
-    "typings": "typings"
+    "typings": "typings",
+    "test": "karma start karma.conf.js --single-run --no-auto-watch --browsers Firefox"
   },
-  "license": "GPL-3.0",
   "devDependencies": {
     "jasmine-core": ">=2.4.1",
-    "karma": "^0.13.22",
-    "karma-firefox-launcher": "^1.0.0",
-    "karma-jasmine": "^1.0.2",
+    "karma": ">=0.13.22",
+    "karma-firefox-launcher": ">=1.0.0",
+    "karma-jasmine": ">=1.0.2",
+    "karma-coverage": ">=1.0.0",
     "lite-server": ">=2.2.0",
     "typedoc": ">=0.3.12",
     "typings": ">=0.8.1"
