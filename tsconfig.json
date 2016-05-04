@@ -1,12 +1,21 @@
 {
   "compilerOptions":{
     "module":"amd",
+    "moduleResolution": "node",
     "target":"es6",
     "removeComments":true,
-    "outFile": "./atkv.js"
+    "sourceMap":true,
+    "emitDecoratorMetadata":true,
+    "experimentalDecorators":true,
+    "outFile": "./dist/atkv.js"
   },
   "filesGlob":[
-    "./**/*.ts",
+    "./src/**/*.ts",
     "!node_modules/**/*.ts"
+  ],
+  "exclude":[
+    "node_modules",
+    "typings/main",
+    "typings/main.d.ts"
   ]
 }

@@ -1,2 +1,6 @@
-atkv.js
+# These are all generated 
 node_modules/
+typings/
+docs/
+dist/
+tests/**/*.js

@@ -1,0 +1,21 @@
+{
+  "name": "atkvjs",
+  "version": "0.0.1",
+  "description": "Computer Graphics, Computer Vision and Image Processing JS/TS library",
+  "repository": "https://github.com/anderflash/atkvjs",
+  "scripts": {
+    "start": "tsc && concurrently \"npm run tsc:w\" \"npm run lite\" ",
+    "lite": "lite-server",
+    "postinstall": "typings install",
+    "tsc": "tsc",
+    "tsc:w": "tsc -w",
+    "typings": "typings"
+  },
+  "license": "GPL-3.0",
+  "devDependencies": {
+    "jasmine-core": ">=2.4.1",
+    "lite-server": ">=2.2.0",
+    "typedoc": ">=0.3.12",
+    "typings": ">=0.8.1"
+  }
+}
