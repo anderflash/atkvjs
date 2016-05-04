@@ -1,0 +1,9 @@
+machine:
+  node:
+    version: 0.10.26
+test:
+  pre:
+    - npm install -g typescript
+    - npm install
+  override:
+    - npm test  
