@@ -1,7 +1,5 @@
 {
   "compilerOptions":{
-    "module":"amd",
-    "moduleResolution": "node",
     "target":"es6",
     "removeComments":true,
     "sourceMap":true,
