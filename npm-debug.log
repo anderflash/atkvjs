@@ -1,0 +1,45 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/bin/node', '/usr/bin/npm', 'run', 'tsc' ]
+2 info using npm@3.8.6
+3 info using node@v5.10.1
+4 verbose run-script [ 'pretsc', 'tsc', 'posttsc' ]
+5 info lifecycle atkvjs@0.0.1~pretsc: atkvjs@0.0.1
+6 silly lifecycle atkvjs@0.0.1~pretsc: no script for pretsc, continuing
+7 info lifecycle atkvjs@0.0.1~tsc: atkvjs@0.0.1
+8 verbose lifecycle atkvjs@0.0.1~tsc: unsafe-perm in lifecycle true
+9 verbose lifecycle atkvjs@0.0.1~tsc: PATH: /usr/lib/node_modules/npm/bin/node-gyp-bin:/home/acmt/Documentos/git/atkvjs/node_modules/.bin:/usr/bin:/home/acmt/.pyenv/shims:/home/acmt/.pyenv/shims:/usr/local/sbin:/usr/local/bin:/usr/bin:/opt/cuda/bin:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/home/acmt/bin:/home/acmt/.gem/ruby/2.3.0/bin
+10 verbose lifecycle atkvjs@0.0.1~tsc: CWD: /home/acmt/Documentos/git/atkvjs
+11 silly lifecycle atkvjs@0.0.1~tsc: Args: [ '-c', 'tsc && tsc -p tests/' ]
+12 silly lifecycle atkvjs@0.0.1~tsc: Returned: code: 2  signal: null
+13 info lifecycle atkvjs@0.0.1~tsc: Failed to exec tsc script
+14 verbose stack Error: atkvjs@0.0.1 tsc: `tsc && tsc -p tests/`
+14 verbose stack Exit status 2
+14 verbose stack     at EventEmitter.<anonymous> (/usr/lib/node_modules/npm/lib/utils/lifecycle.js:239:16)
+14 verbose stack     at emitTwo (events.js:100:13)
+14 verbose stack     at EventEmitter.emit (events.js:185:7)
+14 verbose stack     at ChildProcess.<anonymous> (/usr/lib/node_modules/npm/lib/utils/spawn.js:24:14)
+14 verbose stack     at emitTwo (events.js:100:13)
+14 verbose stack     at ChildProcess.emit (events.js:185:7)
+14 verbose stack     at maybeClose (internal/child_process.js:850:16)
+14 verbose stack     at Process.ChildProcess._handle.onexit (internal/child_process.js:215:5)
+15 verbose pkgid atkvjs@0.0.1
+16 verbose cwd /home/acmt/Documentos/git/atkvjs
+17 error Linux 4.4.6-1-MANJARO
+18 error argv "/usr/bin/node" "/usr/bin/npm" "run" "tsc"
+19 error node v5.10.1
+20 error npm  v3.8.6
+21 error code ELIFECYCLE
+22 error atkvjs@0.0.1 tsc: `tsc && tsc -p tests/`
+22 error Exit status 2
+23 error Failed at the atkvjs@0.0.1 tsc script 'tsc && tsc -p tests/'.
+23 error Make sure you have the latest version of node.js and npm installed.
+23 error If you do, this is most likely a problem with the atkvjs package,
+23 error not with npm itself.
+23 error Tell the author that this fails on your system:
+23 error     tsc && tsc -p tests/
+23 error You can get information on how to open an issue for this project with:
+23 error     npm bugs atkvjs
+23 error Or if that isn't available, you can get their info via:
+23 error     npm owner ls atkvjs
+23 error There is likely additional logging output above.
+24 verbose exit [ 1, true ]
