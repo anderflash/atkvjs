@@ -4,13 +4,13 @@ node_js:
 env:
   - CXX=g++-5
 addons:
+  firefox: "latest"
   apt:
     sources:
       - ubuntu-toolchain-r-test
     packages:
       - g++-5
       - gcc-5
-      - firefox-latest-beta
 script: node_modules/karma/bin/karma start karma.conf.js --single-run --no-auto-watch --browsers Firefox
 before_install:
   - export DISPLAY=:99.0
