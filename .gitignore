@@ -4,3 +4,6 @@ typings/
 docs/
 dist/
 tests/**/*.js
+tests/**/*.js.map
+src/**/*.js
+src/**/*.js.map

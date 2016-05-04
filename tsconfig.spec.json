@@ -1,0 +1,20 @@
+{
+  "compilerOptions":{
+    "module":"amd",
+    "moduleResolution": "node",
+    "target":"es6",
+    "removeComments":true,
+    "sourceMap":true,
+    "emitDecoratorMetadata":true,
+    "experimentalDecorators":true
+  },
+  "filesGlob":[
+    "./tests/**/*.ts",
+    "!node_modules/**/*.ts"
+  ],
+  "exclude":[
+    "node_modules",
+    "typings/main",
+    "typings/main.d.ts"
+  ]
+}
