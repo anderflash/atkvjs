@@ -19,9 +19,11 @@
   "devDependencies": {
     "jasmine-core": ">=2.4.1",
     "karma": ">=0.13.22",
+    "karma-coverage": ">=1.0.0",
     "karma-firefox-launcher": ">=1.0.0",
     "karma-jasmine": ">=1.0.2",
-    "karma-coverage": ">=1.0.0",
+    "karma-mocha-reporter": "^2.0.2",
+    "karma-spec-reporter": ">=0.0.26",
     "lite-server": ">=2.2.0",
     "typedoc": ">=0.3.12",
     "typings": ">=0.8.1"
