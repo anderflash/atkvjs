@@ -12,9 +12,9 @@
     "postinstall": "typings install && npm run tsc",
     "tsc": "tsc",
     "tsc:w": "tsc -w",
-    "tsc:t": "tsc --p \"tsconfig.tests.json\"",
+    "tsc:t": "tsc --p tsconfig.tests.json",
     "typings": "typings",
-    "test": "karma start karma.conf.js --single-run --no-auto-watch --browsers Firefox"
+    "test": "node_modules/karma/bin/karma start karma.conf.js --single-run --no-auto-watch --browsers Firefox"
   },
   "devDependencies": {
     "jasmine-core": ">=2.4.1",
