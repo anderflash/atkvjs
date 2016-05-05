@@ -1,0 +1,19 @@
+{
+  "compilerOptions":{
+    "target":"es6",
+    "removeComments":true,
+    "sourceMap":true,
+    "emitDecoratorMetadata":true,
+    "experimentalDecorators":true,
+    "outFile": "./dist/atkv.js"
+  },
+  "filesGlob":[
+    "./src/**/*.ts",
+    "!node_modules/**/*.ts"
+  ],
+  "exclude":[
+    "node_modules",
+    "typings/main",
+    "typings/main.d.ts"
+  ]
+}

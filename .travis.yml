@@ -1,0 +1,22 @@
+language: node_js
+node_js:
+  - "5"
+env:
+  - CXX=g++-5
+addons:
+  firefox: "latest"
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+      - g++-5
+      - gcc-5
+script: node_modules/karma/bin/karma start karma.conf.js --single-run --no-auto-watch --browsers Firefox
+before_install:
+  - export DISPLAY=:99.0
+  - sh -e /etc/init.d/xvfb start
+  - npm install -g typescript
+  - npm install -g marked
+before_script:
+  - npm install
+  - tsc --p tsconfig.tests.json

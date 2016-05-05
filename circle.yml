@@ -1,0 +1,15 @@
+machine:
+  node:
+    version: 0.10.33
+dependencies:
+  cache_directories:
+    - ~/nvm/v0.10.33/lib/node_modules/typescript
+    - ~/nvm/v0.10.33/bin/tsc
+  pre:
+    - if [ ! -e ~/nvm/v0.10.33/bin/tsc ]; then npm install -g typescript; else echo "TypeScript seems to be cached"; fi;
+test:
+  pre:
+    - npm install
+  override:
+    - npm test
+    
