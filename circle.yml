@@ -12,3 +12,4 @@ test:
     - npm install
   override:
     - npm test
+    
