@@ -1,10 +1,10 @@
 /// <reference path="../../src/core/ndarray.ts"/>
 
 
-//import NDArray = na.NDArray;
-//import zeros   = na.zeros;
-//import ones    = na.ones;
-//import eye     = na.eye;
+import NDArray = at.NDArray;
+import zeros   = at.zeros;
+import ones    = at.ones;
+import eye     = at.eye;
 describe('NDArray tests', ()=>{
   var emptyarray = new NDArray(null,[2, 3]);
   it("should have proper dimension", function(){
@@ -63,6 +63,14 @@ describe('NDArray tests', ()=>{
     }
   });
   it("should get a substring", function(){
-    var array_3d: NDArray = new NDArray([0,1,2,3,4,5,6,7,8],[3,3]);
+    var array_values: Array<number> = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+    var subarray_values: Array<number> = [1, 4, 7];
+    var array_3d: NDArray = new NDArray(array_values,[3, 3]);
+    // filter just first dimension (y in this case)
+    var subarray: NDArray = array_3d.slice([1, 2]);
+    var i = 0;
+    for(let value of subarray){
+      expect(value).toBe(array_values[i++]);
+    }
   });
 });
