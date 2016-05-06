@@ -7,13 +7,14 @@
     "experimentalDecorators":true,
     "outFile": "./dist/atkv.js"
   },
-  "filesGlob":[
-    "./src/**/*.ts",
-    "!node_modules/**/*.ts"
-  ],
-  "exclude":[
-    "node_modules",
-    "typings/main",
-    "typings/main.d.ts"
+  "files":[
+    "src/core/ndarray.ts"
   ]
+
+  // "exclude":[
+  //   "node_modules",
+  //   "typings/main",
+  //   "typings/main.d.ts",
+  //   "tests"
+  // ]
 }

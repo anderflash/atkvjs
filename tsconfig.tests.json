@@ -4,15 +4,13 @@
     "removeComments":true,
     "sourceMap":true,
     "emitDecoratorMetadata":true,
-    "experimentalDecorators":true
+    "experimentalDecorators":true,
+    "outDir":"dist"
   },
-  "filesGlob":[
-    "./tests/**/*.ts",
-    "!node_modules/**/*.ts"
-  ],
   "exclude":[
     "node_modules",
-    "typings/main",
-    "typings/main.d.ts"
+    "src",
+    "typings/browser",
+    "typings/browser.d.ts"
   ]
 }
