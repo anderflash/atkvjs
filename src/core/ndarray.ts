@@ -4,60 +4,101 @@ module at {
   /**
    * @brief      Class for multidimensional arrays
    */
-  export class NDArray {
-    dim: number;
-    size: Array<number>;
-    step: Array<number>;
-    data: ArrayBuffer;
-    dtype: TypedArray;
-    num_elements: number;
-    elemsize: number;
-    offset: number;
-    is_data_owner: boolean;
-    constructor(data_array: ArrayLike<number> | Iterable<number> | ArrayBuffer,
-      data_size: Array<number>,
-      dtype: any = null, default_value: any = null) {
-      this.dim = data_size.length;
+  export class NDArray<T extends ArrayBuffered> {
+    // -----------------------
+    // Properties
+    // -----------------------
+     
+    /**
+     * Number of dimensions
+     */
+    dim          : number;            
+    /**
+     * Size of each dimension
+     */
+    size         : Array<number>;
+    /**
+     * How many elements we jump in array for each dimension
+     */
+    step         : Array<number>;     
+    /**
+     * The number of elements
+     */
+    num_elements : number;
+    /**
+     * If it's a subarray, offset is the difference between the start of subarray 
+     * and the start of the parent array
+     */
+    offset       : number;
+    /**
+     * The data buffer of the array (to access the elements we 
+     * need to use typed_data instead of data)
+     */
+    buffer       : ArrayBuffer;
+    /**
+     * The data view of the buffer
+     */
+    data         : T;
+    /**
+     * Superarray of this array
+     */
+    parent: NDArray<T>;
+    
+    /**
+     * @brief      Class for a multidimensional arrays 
+     *
+     * @param      data_array     The data array
+     * @param      data_size      The data size
+     * @param      dtype          The dtype
+     * @param      default_value  The default value
+     */
+    constructor(
+      private ctor : TypedArrayConstructor<T>,
+      bufferOrArray: ArrayLike<number> | ArrayBuffer,
+      data_size    : Array<number>,
+      default_value: any = null)
+    {
+      // Getting the dimension
+      this.dim  = data_size.length;
+
+      // The size for each dimension
       this.size = data_size;
+
+      // The step
       this.step = Array<number>(this.dim);
       this.step[this.dim - 1] = 1;
       for (let i = 1; i < this.dim; i++)
         this.step[this.dim - i - 1] = this.step[this.dim - i] *
-          this.size[this.dim - i];
+                                      this.size[this.dim - i];
+
+      // The number of elements
       this.num_elements = this.step[0] * this.size[0];
-      if (dtype === null) {
-        dtype = Int32Array;
-        this.elemsize = 4;
-      }
+
+      // Offset
+      this.offset = 0;
+
+      // Parent array
+      this.parent = null;
 
       // Get data
-      if (data_array !== null) {
-        if (data_array instanceof ArrayBuffer) {
-          this.data = data_array;
-          this.is_data_owner = false;
-        } else {
-          this.dtype = new dtype(data_array);
-          this.data = this.dtype.buffer;
-          this.is_data_owner = true;
-        }
-      } else {
-        this.data = new ArrayBuffer(this.elemsize * this.num_elements);
-        this.is_data_owner = true;
-      }
-      this.dtype = new dtype(this.data);
+      if(bufferOrArray === null)
+        bufferOrArray = new ArrayBuffer(this.ctor.BYTES_PER_ELEMENT * this.num_elements);
+      if(bufferOrArray instanceof ArrayBuffer)
+        this.data = new this.ctor(bufferOrArray);
+      else
+        this.data = new this.ctor(bufferOrArray);
+      this.buffer = this.data.buffer;
 
-      if (dtype === undefined) {
-        this.dtype = new Uint32Array(this.data);
-      }
+      // Filling with default value if set
       if (default_value !== null) {
         this.fill(default_value);
       }
-      this.offset = 0;
     }
-    indices(index) {
 
+    indices(index):Array<number> {
+      return [];
     }
-    index(indices) {
+    index(indices):number {
       let index: number = 0;
       for (let i = 0; i < indices.length; i++) {
         index += this.step[i] * indices[i];
@@ -65,14 +106,20 @@ module at {
       return index;
     }
     get(...items): number {
-      if (items.length == 1) return this.dtype[items[0]];
-      return this.dtype[this.index(items)];
+      if (items.length == 1) return this.typed_data[items[0]];
+      return this.typed_data[this.index(items)];
     }
-    set(indices: Array<number>, value: number) {
-      if (indices.length == 1) this.dtype[indices[0]] = value;
-      this.dtype[this.index(indices)] = value;
+    set(indices: Array<number>, value: number):void {
+      if (indices.length == 1) this.typed_data[indices[0]] = value;
+      this.typed_data[this.index(indices)] = value;
     }
-    fill(value: number) {
+    /**
+     * Set all array (or subarray) to the value
+     *
+     * @param      value  The value
+     *
+     */
+    fill(value: number):void {
       this.dtype.fill(value);
     }
     /**
@@ -82,29 +129,63 @@ module at {
      *
      * @return     { description_of_the_return_value }
      */
-    slice(...ranges:Array<Array<number>>){
+    slice(...ranges:Array<Array<number>>):NDArray<T>{
       var size: Array<number> = Array(ranges.length);
       for (let i = 0; i < this.size.length; i++){
         if(i > ranges.length){
           size[i] = this.size[i];
         }
         else{
-          if(ranges[i].length;
+          
         }
       }
-      var subarray: NDArray = new NDArray(this.data, this.size, this.dtype);
+      var subarray:NDArray<T> = new NDArray<T>(this.data, this.size, this.dtype);
 
       return subarray;
     }
-  }
+    /**
+     * @brief      Returns true if all values in list equals the values 
+     *             in array
+     *
+     * @param      list  The list
+     *
+     * @return     True if has equal data values (regardless of type)
+     */
+    equals(list:ArrayLike<number>):boolean{
+      for (let i = 0; i < list.length; i++){
+        if (list[i] != this.get(i)) return false;
+      }
+      return true;
+    }
+    [Symbol.iterator](): IterableIterator<number>{
+      var index:number = -1;
+      var dtype = this.dtype;
 
-  export function zeros(size: Array<number>, dtype: any = null) {
+    }
+  }
+  /**
+   * @brief      Create an array of zeros
+   *
+   * @param      size   The size
+   * @param      dtype  The dtype
+   *
+   * @return     An array of zeros
+   */
+  export function zeros(size: Array<number>, dtype: any = null):NDArray {
     return new NDArray(null, size, dtype, 0);
   }
-  export function ones(size: Array<number>, dtype: any = null) {
+  /**
+   * @brief      Create
+   *
+   * @param      size   The size
+   * @param      dtype  The dtype
+   *
+   * @return     { description_of_the_return_value }
+   */
+  export function ones(size: Array<number>, dtype: any = null):NDArray {
     return new NDArray(null, size, dtype, 1);
   }
-  export function eye(size: number, dtype: any = null) {
+  export function eye(size: number, dtype: any = null):NDArray {
     var array: NDArray = zeros([size, size], dtype);
     for (let i = 0; i < size; i++) {
       array.set([i, i], 1);

@@ -7,6 +7,10 @@
     "experimentalDecorators":true,
     "outFile": "./dist/atkv.js"
   },
+  "filesGlob":[
+    "!node_modules/**/*.ts",
+    "typings/main"
+  ],
   "files":[
     "src/core/ndarray.ts"
   ]

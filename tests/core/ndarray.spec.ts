@@ -1,6 +1,5 @@
 /// <reference path="../../src/core/ndarray.ts"/>
-
-
+/// <reference path="../../typings/main/ambient/jasmine/index.d.ts" />
 import NDArray = at.NDArray;
 import zeros   = at.zeros;
 import ones    = at.ones;
@@ -65,6 +64,7 @@ describe('NDArray tests', ()=>{
   it("should get a substring", function(){
     var array_values: Array<number> = [0, 1, 2, 3, 4, 5, 6, 7, 8];
     var subarray_values: Array<number> = [1, 4, 7];
+    var subarray_size: Array<number> = [1, 3];
     var array_3d: NDArray = new NDArray(array_values,[3, 3]);
     // filter just first dimension (y in this case)
     var subarray: NDArray = array_3d.slice([1, 2]);
@@ -72,5 +72,15 @@ describe('NDArray tests', ()=>{
     for(let value of subarray){
       expect(value).toBe(array_values[i++]);
     }
+
+    expect(subarray.equals(subarray_values)).toEqual(true);
+
+    // Testing changes
+    subarray.fill(5);
+    var array_new_values: Array<number> = [0, 5, 2, 
+                                           3, 5, 5, 
+                                           6, 5, 8];
+    expect(array.equals(array_new_values)).toEqual(true);
+
   });
 });
