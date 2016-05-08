@@ -20,6 +20,7 @@ interface Filled<T>{
 }
 
 interface TypedArray<T> extends ArrayBuffered, Filled<T>{
+  BYTES_PER_ELEMENT: number;
 }
 
 interface TypedArrayConstructor<T extends ArrayBuffered> {

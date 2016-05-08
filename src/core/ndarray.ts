@@ -4,7 +4,7 @@ module at {
   /**
    * @brief      Class for multidimensional arrays
    */
-  export class NDArray<T extends ArrayBuffered> {
+  export class NDArray<T extends TypedArray<T>> {
     // -----------------------
     // Properties
     // -----------------------
@@ -96,7 +96,12 @@ module at {
     }
 
     indices(index):Array<number> {
-      return [];
+      var items: Array<number> = Array(this.size.length);
+      for (let i: number = 0; i < this.size.length; i++){
+        items[i] = Math.floor(index / this.step[i]);
+        index %= this.step[i];
+      }
+      return items;
     }
     index(indices):number {
       let index: number = 0;
@@ -141,7 +146,7 @@ module at {
           
         }
       }
-      var subarray:NDArray<T> = new NDArray(T,this.buffer, this.size, this.dtype);
+      var subarray:NDArray<T> = new NDArray(this.ctor, this.buffer, this.size);
 
       return subarray;
     }
@@ -159,9 +164,16 @@ module at {
       }
       return true;
     }
-    [Symbol.iterator](): IterableIterator<number>{
+    [Symbol.iterator](): Iterator<number>{
       var index:number = -1;
-      var dtype = this.dtype;
+      var array: NDArray<T> = this;
+      return {
+        next:function(){
+          return index < array.num_elements ? {
+            value: array.get(index), done: false
+          } :{done:true};
+        }
+      };
 
     }
   }
@@ -173,8 +185,11 @@ module at {
    *
    * @return     An array of zeros
    */
-  export function zeros(size: Array<number>, dtype: any = null):NDArray {
-    return new NDArray(null, size, dtype, 0);
+  export function zeros<T extends TypedArray<T>>(
+    ctor: TypedArrayConstructor<TypedArray<T>>, 
+    size: Array<number>, dtype: any = null): NDArray<T> 
+  {
+    return new NDArray(ctor, null, size, 0);
   }
   /**
    * @brief      Create
@@ -184,11 +199,15 @@ module at {
    *
    * @return     { description_of_the_return_value }
    */
-  export function ones(size: Array<number>, dtype: any = null):NDArray {
-    return new NDArray(null, size, dtype, 1);
+  export function ones<T extends TypedArray<T>>(
+    ctor: TypedArrayConstructor<TypedArray<T>>,
+    size: Array<number>, dtype: any = null): NDArray<T> {
+    return new NDArray(ctor, null, size, 1);
   }
-  export function eye(size: number, dtype: any = null):NDArray {
-    var array: NDArray = zeros([size, size], dtype);
+  export function eye<T extends TypedArray<T>>(
+    ctor: TypedArrayConstructor<TypedArray<T>>, 
+    size: number): NDArray<T> {
+    var array: NDArray<T> = zeros(ctor,[size, size]);
     for (let i = 0; i < size; i++) {
       array.set([i, i], 1);
     }
