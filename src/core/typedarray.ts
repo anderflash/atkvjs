@@ -15,6 +15,13 @@ interface ArrayBuffered {
   byteOffset: number;
 }
 
+interface Filled<T>{
+  fill(value: number, start?: number, end?: number): T;
+}
+
+interface TypedArray<T> extends ArrayBuffered, Filled<T>{
+}
+
 interface TypedArrayConstructor<T extends ArrayBuffered> {
   prototype: T;
   new (length: number): T;

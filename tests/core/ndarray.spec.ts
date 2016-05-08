@@ -26,7 +26,7 @@ describe('NDArray tests', ()=>{
   });
 
   var data = [1, 2, 3, 4, 5, 6];
-  var array_with_value:NDArray = new NDArray([1, 2, 3, 4, 5, 6], [2, 3]);
+  var array_with_value:NDArray = new NDArray(Int32Array,[1, 2, 3, 4, 5, 6], [2, 3]);
   it("should have proper data",function(){
     for (let i = 0; i < data.length; i++){
       expect(array_with_value.get(i)).toBe(data[i]);

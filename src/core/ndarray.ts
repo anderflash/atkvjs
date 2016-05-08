@@ -38,11 +38,11 @@ module at {
     /**
      * The data view of the buffer
      */
-    data         : T;
+    data         : TypedArray<T>;
     /**
      * Superarray of this array
      */
-    parent: NDArray<T>;
+    parent       : NDArray<T>;
     
     /**
      * @brief      Class for a multidimensional arrays 
@@ -53,7 +53,7 @@ module at {
      * @param      default_value  The default value
      */
     constructor(
-      private ctor : TypedArrayConstructor<T>,
+      private ctor: TypedArrayConstructor<TypedArray<T>>,
       bufferOrArray: ArrayLike<number> | ArrayBuffer,
       data_size    : Array<number>,
       default_value: any = null)
@@ -106,12 +106,12 @@ module at {
       return index;
     }
     get(...items): number {
-      if (items.length == 1) return this.typed_data[items[0]];
-      return this.typed_data[this.index(items)];
+      if (items.length == 1) return this.data[items[0]];
+      return this.data[this.index(items)];
     }
     set(indices: Array<number>, value: number):void {
-      if (indices.length == 1) this.typed_data[indices[0]] = value;
-      this.typed_data[this.index(indices)] = value;
+      if (indices.length == 1) this.data[indices[0]] = value;
+      this.data[this.index(indices)] = value;
     }
     /**
      * Set all array (or subarray) to the value
@@ -120,12 +120,14 @@ module at {
      *
      */
     fill(value: number):void {
-      this.dtype.fill(value);
+      this.data.fill(value);
     }
     /**
      * @brief      Get indices
      *
-     * @param      ranges  The ranges
+     * @param      ranges  list of ranges. Each range is a list of numbers:
+     *                     [start,stop,step]. You can set [start], [start,stop]
+     *                     or [start,stop,step].
      *
      * @return     { description_of_the_return_value }
      */
@@ -139,7 +141,7 @@ module at {
           
         }
       }
-      var subarray:NDArray<T> = new NDArray<T>(this.data, this.size, this.dtype);
+      var subarray:NDArray<T> = new NDArray(T,this.buffer, this.size, this.dtype);
 
       return subarray;
     }
