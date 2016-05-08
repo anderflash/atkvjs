@@ -12,9 +12,12 @@
     "postinstall": "typings install && npm run tsc",
     "tsc": "tsc",
     "tsc:w": "tsc -w",
-    "tsc:t": "tsc --p \"tsconfig.tests.json\"",
+    "tsc:t": "tsc --p tsconfig.tests.json",
     "typings": "typings",
-    "test": "karma start karma.conf.js --single-run --no-auto-watch --browsers Firefox"
+    "test": "node_modules/karma/bin/karma start karma.conf.js --single-run --no-auto-watch --browsers Firefox",
+    "test:w":"node_modules/karma/bin/karma start karma.conf.js --auto-watch --browsers Firefox",
+    "doc":"node_modules/typedoc/bin/typedoc --out docs/ src/ --target es6"
+
   },
   "devDependencies": {
     "jasmine-core": ">=2.4.1",
@@ -26,6 +29,7 @@
     "karma-spec-reporter": ">=0.0.26",
     "lite-server": ">=2.2.0",
     "typedoc": ">=0.3.12",
+    "typescript": "^1.8.10",
     "typings": ">=0.8.1"
   }
 }

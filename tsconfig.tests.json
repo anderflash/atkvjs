@@ -4,15 +4,16 @@
     "removeComments":true,
     "sourceMap":true,
     "emitDecoratorMetadata":true,
-    "experimentalDecorators":true
+    "experimentalDecorators":true,
+    "outDir":"dist"
   },
   "filesGlob":[
-    "./tests/**/*.ts",
-    "!node_modules/**/*.ts"
-  ],
-  "exclude":[
-    "node_modules",
+    "!node_modules/**/*.ts",
     "typings/main",
-    "typings/main.d.ts"
+    "typings/main.d.ts",
+    "typings/browser"
+  ],
+  "files":[
+    "tests/core/ndarray.spec.ts"
   ]
 }
