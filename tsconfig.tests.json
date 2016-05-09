@@ -15,6 +15,7 @@
   ],
   "files":[
     "tests/core/ndarray.spec.ts",
-    "tests/core/ndarraygraph.spec.ts"
+    "tests/core/ndarraygraph.spec.ts",
+    "tests/imgproc/ift.spec.ts"
   ]
 }
