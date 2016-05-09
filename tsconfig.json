@@ -12,7 +12,9 @@
     "typings/main"
   ],
   "files":[
-    "src/core/ndarray.ts"
+    "src/core/ndarray.ts",
+    "src/core/typedarray.ts",
+    "src/core/ndarraygraph.ts"
   ]
 
   // "exclude":[

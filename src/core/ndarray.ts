@@ -95,8 +95,9 @@ module at {
       }
     }
 
-    indices(index):Array<number> {
-      var items: Array<number> = Array(this.size.length);
+    indices(index, items:Array<number> = null):Array<number> {
+      if(items === null)
+        items = Array(this.size.length);
       for (let i: number = 0; i < this.size.length; i++){
         items[i] = Math.floor(index / this.step[i]);
         index %= this.step[i];
