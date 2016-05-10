@@ -16,8 +16,9 @@
  ** along with this program.  If not, see <http://www.gnu.org/licenses/>.
  **/
 
-/// <reference path="../../src/3d/object3d.ts" />
 /// <reference path="../../typings/main/ambient/jasmine/index.d.ts" />
- 
-describe('Object3D tests', () => {
+/// <reference path="../../src/3d/vec3.ts" />
+
+describe("Vec3 tests", function() {
+  
 });

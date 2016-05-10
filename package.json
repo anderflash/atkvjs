@@ -17,7 +17,7 @@
     "test": "node_modules/karma/bin/karma start karma.conf.js --single-run --no-auto-watch --browsers Firefox",
     "test:w": "node_modules/karma/bin/karma start karma.conf.js --auto-watch --browsers Firefox",
     "doc": "node_modules/typedoc/bin/typedoc --out docs/ src/ --target es6",
-    "uglify":"node_modules/uglify-js/bin/uglifyjs dist/atkv.js --compress --mangle > dist/atkv.min.js"
+    "uglify": "node_modules/uglify-js/bin/uglifyjs dist/atkv.js --compress --mangle > dist/atkv.min.js"
   },
   "devDependencies": {
     "jasmine-core": ">=2.4.1",
@@ -31,6 +31,6 @@
     "typedoc": ">=0.3.12",
     "typescript": "^1.8.10",
     "typings": ">=0.8.1",
-    "uglify-js": ">=2.6.0"
+    "uglify-js": "git+https://github.com/mishoo/UglifyJS2.git#harmony"
   }
 }

@@ -14,7 +14,11 @@
   "files":[
     "src/core/ndarray.ts",
     "src/core/typedarray.ts",
-    "src/core/ndarraygraph.ts"
+    "src/core/ndarraygraph.ts",
+    "src/3d/vec.ts",
+    "src/3d/vec3.ts",
+    "src/3d/vec4.ts",
+    "src/3d/mat4.ts"
   ]
 
   // "exclude":[

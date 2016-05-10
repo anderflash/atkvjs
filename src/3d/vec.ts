@@ -16,8 +16,14 @@
  ** along with this program.  If not, see <http://www.gnu.org/licenses/>.
  **/
 
-/// <reference path="../../src/3d/object3d.ts" />
-/// <reference path="../../typings/main/ambient/jasmine/index.d.ts" />
- 
-describe('Object3D tests', () => {
-});
+module at{
+  export interface Vec extends Float64Array{
+
+  }
+  export interface VecDotted<T extends Vec> extends Vec{
+    dot(vec: VecDotted<T>): number;
+  }
+  export interface VecConstructor<T extends Vec>{
+    new (): T;
+  }
+}

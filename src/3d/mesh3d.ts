@@ -16,8 +16,20 @@
  ** along with this program.  If not, see <http://www.gnu.org/licenses/>.
  **/
 
-/// <reference path="../../src/3d/object3d.ts" />
-/// <reference path="../../typings/main/ambient/jasmine/index.d.ts" />
+/// <reference path="object3d.ts" />
+/// <reference path="geometry3d.ts" />
+/// <reference path="material.ts" />
  
-describe('Object3D tests', () => {
-});
+module at{
+  export class Mesh3D implements Object3D{
+    name: string;
+    geometry: Geometry3D;
+    material: Material;
+    constructor(geometry?:Geometry3D,
+                material?:Material3D
+    ){
+      this.geometry = geometry;
+      this.material = material;
+    }
+  }
+}
