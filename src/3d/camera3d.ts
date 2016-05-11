@@ -23,20 +23,34 @@ module at{
     viewMatrix: Mat4;
     projectionMatrix: Mat4;
 
-    moveForward(units:number):void{
+    right  : Vec3;
+    up     : Vec3;
+    forward: Vec3;
+    origin: Vec3;
 
+    reset_view():void{
+      this.viewMatrix.eye();
+      this.right.set([1, 0, 0]);
+      this.up.set([0, 1, 0]);
+      this.forward.set([0, 0, -1]);
+      this.origin.fill(0);
+    }
+    moveForward(units:number):void{
+      this.forward.mult(units,at.vec3_tmp[0]);
+      this.origin.add(at.vec3_tmp[0]);
     }
     moveBackwards(units: number): void {
-
+      this.moveForward(-units);
     }
     moveLeft(units: number): void {
-
+      this.moveRight(-units);
     }
     moveRight(units: number): void {
-
+      this.right.mult(units, at.vec3_tmp[0]);
+      this.origin.add(at.vec3_tmp[0]);
     }
     moveUp(units: number): void {
-
+      this.up.mult(units, at.vec3_tmp[0]);
     }
     moveDown(units: number): void {
 
@@ -48,6 +62,9 @@ module at{
 
     }
     pitch(units:number):void{
+
+    }
+    updateViewMatrix(){
 
     }
 
