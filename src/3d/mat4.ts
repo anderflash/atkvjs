@@ -19,7 +19,7 @@
 /// <reference path="vec3.ts" />
 /// <reference path="vec4.ts" />
 module at{
-  export class Mat4 extends Float64Array implements Vec{
+  export class Mat4 extends Float64Array implements Vec, Clonable<Mat4>{
     constructor(){
       super(16);
     }
@@ -92,13 +92,10 @@ module at{
         returnMat[i] = this[i] * mat[i];
       return returnMat;
     }
-    dotVec<T extends Vec>(ctor:VecConstructor<VecDotted<T>>,
-                          vec: VecDotted<T>, 
-                          to_new: boolean = false): VecDotted<T>
-    {
-      let vec_mat: VecDotted<T> = new ctor();
-      let vec_cpy: VecDotted<T> = new ctor();
-      let mat_t: Mat4   = this.transpose();
+    dotVec<T extends VecClonableDotted<T>>(vec:T,to_new:boolean = false):T{
+      let vec_mat: T = vec.clone();
+      let vec_cpy: T = vec.clone();
+      let mat_t: Mat4 = this.transpose();
       vec_cpy.set(vec);
       for (let i = 0; i < vec_mat.length; i++) {
         let i2: number = i << 2;
@@ -149,6 +146,11 @@ module at{
         }
       }
       return mat_r;
+    }
+    clone():Mat4{
+      var m: Mat4 = new Mat4();
+      m.set(this);
+      return m;
     }
   }
 }

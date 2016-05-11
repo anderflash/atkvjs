@@ -17,13 +17,20 @@
  **/
 
 module at{
-  export interface Vec extends Float64Array{
-
-  }
-  export interface VecDotted<T extends Vec> extends Vec{
-    dot(vec: VecDotted<T>): number;
-  }
-  export interface VecConstructor<T extends Vec>{
+  // Basic Interfaces
+  export interface EmptyConstructor<T> {
     new (): T;
   }
+  export interface Dotted<T> {
+    dot(param: Dotted<T>|ArrayLike<number>): number;
+  }
+  export interface Clonable<T> {
+    clone(): T;
+  }
+
+  // Interfaces for Vec
+  export interface Vec extends Float64Array{}
+  export interface VecDotted<T extends Vec> extends Vec, Dotted<T>{}
+  export interface VecClonable<T extends Vec> extends Vec, Clonable<T>{}
+  export interface VecClonableDotted<T extends Vec> extends VecClonable<T>, VecDotted<T>{}
 }

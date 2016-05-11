@@ -16,42 +16,11 @@
  ** along with this program.  If not, see <http://www.gnu.org/licenses/>.
  **/
 
-/// <reference path="mat4.ts" />
-
 module at{
-  export class Camera3D{
-    viewMatrix: Mat4;
-    projectionMatrix: Mat4;
-
-    moveForward(units:number):void{
-
-    }
-    moveBackwards(units: number): void {
-
-    }
-    moveLeft(units: number): void {
-
-    }
-    moveRight(units: number): void {
-
-    }
-    moveUp(units: number): void {
-
-    }
-    moveDown(units: number): void {
-
-    }
-    yaw(units: number): void {
-
-    }
-    roll(units:number):void{
-
-    }
-    pitch(units:number):void{
-
-    }
-
-    
-
+  export function radToDeg(rad:number):number{
+    return rad * 57.295779513082320876798154814105170332405472466564321549;
+  }
+  export function degToRad(deg:number):number{
+    return deg * 0.017453292519943295769236907684886127134428718885417255;
   }
 }

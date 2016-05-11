@@ -19,7 +19,7 @@
 /// <reference path="vec.ts" />
 
 module at{
-  export class Vec4 extends Float64Array implements Vec{
+  export class Vec4 extends Float64Array implements VecClonableDotted<Vec4>{
     constructor(){
       super(4);
     }
@@ -82,6 +82,16 @@ module at{
     normalize():void{
       var mag_inv: number = 1.0/this.mag();
       this.mult(mag_inv);
+    }
+    clone():Vec4{
+      var v: Vec4 = new Vec4();
+      v.set(this);
+      return v;
+    }
+    toVec3(): Vec3 {
+      var v: Vec3 = new Vec3();
+      v.set(this);
+      return v;
     }
   }
 }
