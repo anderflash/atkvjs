@@ -20,52 +20,77 @@
 
 module at{
   export class Vec4 extends Float64Array implements VecClonableDotted<Vec4>{
-    constructor(){
-      super(4);
+    constructor(buffer: ArrayBuffer = null, offset: number = null) {
+      if (buffer === null)
+        super(4);
+      else
+        super(buffer, offset, 4);
     }
-    add(vec: Vec4|ArrayLike<number>) {
-      this[0] += vec[0];
-      this[1] += vec[1];
-      this[2] += vec[2];
-      this[3] += vec[3];
-    }
-    subtract(vec: Vec4|ArrayLike<number>) {
-      this[0] -= vec[0];
-      this[1] -= vec[1];
-      this[2] -= vec[2];
-      this[3] -= vec[3];
-    }
-    mult(vec: Vec4 | ArrayLike<number>|number) {
+    add(vec: Vec4|ArrayLike<number>|number, out: Vec4 = null): void {
+      var vec_add: Vec4;
+      if (out === null) vec_add = this;
+      else vec_add = out;
       if(typeof vec === 'number'){
-        this[0] *= vec;
-        this[1] *= vec;
-        this[2] *= vec;
-        this[3] *= vec;  
+        vec_add[0] = this[0] + vec;
+        vec_add[1] = this[1] + vec;
+        vec_add[2] = this[2] + vec;
+        vec_add[3] = this[3] + vec;  
       }else{
-        this[0] *= vec[0];
-        this[1] *= vec[1];
-        this[2] *= vec[2];
-        this[3] *= vec[3];  
+        vec_add[0] = this[0] + vec[0];
+        vec_add[1] = this[1] + vec[1];
+        vec_add[2] = this[2] + vec[2];
+        vec_add[3] = this[3] + vec[3]; 
       }
     }
-    divide(vec:Vec4 | ArrayLike<number>|number){
+    subtract(vec: Vec4|ArrayLike<number>|number, out: Vec4 = null): void {
+      var vec_sub: Vec4;
+      if (out === null) vec_sub = this;
+      else vec_sub = out;
       if(typeof vec === 'number'){
-        this[0] /= vec;
-        this[1] /= vec;
-        this[2] /= vec;
-        this[3] /= vec; 
+        vec_sub[0] = this[0] - vec;
+        vec_sub[1] = this[1] - vec;
+        vec_sub[2] = this[2] - vec;
+        vec_sub[3] = this[3] - vec;
       }else{
-        this[0] /= vec[0];
-        this[1] /= vec[1];
-        this[2] /= vec[2];
-        this[3] /= vec[3];   
+        vec_sub[0] = this[0] - vec[0];
+        vec_sub[1] = this[1] - vec[1];
+        vec_sub[2] = this[2] - vec[2];
+        vec_sub[3] = this[3] - vec[3];
       }
     }
-    dot(vec: Vec4|ArrayLike<number>): number {
+    dot(vec: Vec4 | ArrayLike<number>): number {
       return this[0] * vec[0] +
         this[1] * vec[1] +
         this[2] * vec[2] +
         this[3] * vec[3];
+    }
+    mult(vec: Vec4 | ArrayLike<number> | number, out: Vec4 = null): void {
+      var vec_mult: Vec4;
+      if (out === null) vec_mult = this;
+      else vec_mult = out;
+
+      if (typeof vec === 'number') {
+        vec_mult[0] = this[0] * vec;
+        vec_mult[1] = this[1] * vec;
+        vec_mult[2] = this[2] * vec;
+      } else {
+        vec_mult[0] = this[0] * vec[0];
+        vec_mult[1] = this[1] * vec[1];
+        vec_mult[2] = this[2] * vec[2];
+      }
+
+    }
+    divide(vec: Vec4 | ArrayLike<number> | number, out: Vec4 = null): void {
+      if (typeof vec === 'number') {
+        this.mult(1.0 / vec, out);
+      } else {
+        var vec_mult: Vec4;
+        if (out === null) vec_mult = this;
+        else vec_mult = out;
+        vec_mult[0] = this[0] / vec[0];
+        vec_mult[1] = this[1] / vec[1];
+        vec_mult[2] = this[2] / vec[2];
+      }
     }
     mag(): number {
       return Math.sqrt(this.magsqr());
@@ -79,19 +104,28 @@ module at{
     ones(): void {
       this.fill(1);
     }
-    normalize():void{
-      var mag_inv: number = 1.0/this.mag();
-      this.mult(mag_inv);
+    normalize(out: Vec4 = null): void {
+      var mag_inv: number = 1.0 / this.mag();
+      this.mult(mag_inv, out);
     }
-    clone():Vec4{
+    clone(): Vec4 {
       var v: Vec4 = new Vec4();
       v.set(this);
       return v;
     }
-    toVec3(): Vec3 {
-      var v: Vec3 = new Vec3();
+    toVec4(w: number = 1): Vec4 {
+      var v: Vec4 = new Vec4();
       v.set(this);
+      v[3] = w;
       return v;
     }
+  }
+
+  // Creating a temporary buffer for Vec4 (for reuse)
+  var vec3_buffer: ArrayBuffer = new ArrayBuffer(10 << 2);
+  var vec3_tmp: Array<Vec4> = Array(10);
+  for (let i = 0; i < 10; i++) {
+    vec3_tmp[i] = new Vec4(vec3_buffer, i << 2);
+  }
   }
 }
