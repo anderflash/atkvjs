@@ -16,24 +16,13 @@
  ** along with this program.  If not, see <http://www.gnu.org/licenses/>.
  **/
 
-/// <reference path="object3d.ts" />
-/// <reference path="geometry3d.ts" />
-/// <reference path="material.ts" />
-/// <reference path="mat4.ts" />
- 
+/// <reference path="container3d.ts" />
+
 module at{
-  export class Mesh3D implements Object3D{
-    name       : string;
-    modelMatrix: Mat4;
-    geometry   : Geometry3D;
-    material   : Material;
-    constructor(geometry?:Geometry3D,
-                material?:Material,
-                name?: string
-    ){
-      this.geometry = geometry;
-      this.material = material;
-      this.name     = name;
+  export class Scene extends Container3D{
+    constructor(arraylength?:number){
+      super(arraylength);
+      
     }
   }
 }

@@ -17,12 +17,14 @@
  **/
 
 /// <reference path="object3d.ts" />
+/// <reference path="mat4.ts" />
 module at{
-  class Container3D extends Array<Object3D> implements Object3D{
+  export class Container3D extends Array<Object3D> implements Object3D{
     name: string;
     modelMatrix: Mat4;
-    constructor(arrayLength?:number){
+    constructor(name:string, arrayLength?:number){
       super(arrayLength);
-    }    
+      this.name = name;
+    }
   }
 }
