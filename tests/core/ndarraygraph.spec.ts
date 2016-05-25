@@ -14,7 +14,7 @@ describe('NDArrayGraph Tests', function(){
   it("should create a new arraygraph",function(){
     type tipo     = Int32Array;
     var tipo_ctor = Int32Array;
-    var array     :NDArray<tipo>      = new NDArray(tipo_ctor, null,[2, 5]);
+    var array: NDArray<tipo> = new NDArray(tipo_ctor, [2, 5]);
     var arraygraph:NDArrayGraph<tipo> = new NDArrayGraph(tipo_ctor, array); // defaults to Neighboring 4
     var edges_values: Array<number> = [
       0, 1, 0, 1,
@@ -52,7 +52,7 @@ describe('NDArrayGraph Tests', function(){
   it("should navigate clearly", function() {
     type tipo = Int32Array;
     var tipo_ctor = Int32Array;
-    var array: NDArray<tipo> = new NDArray(tipo_ctor, null, [2, 5]);
+    var array: NDArray<tipo> = new NDArray(tipo_ctor, [2, 5]);
     var arraygraph: NDArrayGraph<tipo> = new NDArrayGraph(tipo_ctor, array);
     var i: number = 0;
     var neighbors_of_3: Array<number> = [2, 4, 8];
@@ -62,7 +62,7 @@ describe('NDArrayGraph Tests', function(){
   it("should remove arcs", function(){
     type tipo = Int32Array;
     var tipo_ctor = Int32Array;
-    var array: NDArray<tipo> = new NDArray(tipo_ctor, null, [2, 5]);
+    var array: NDArray<tipo> = new NDArray(tipo_ctor, [2, 5]);
     var arraygraph: NDArrayGraph<tipo> = new NDArrayGraph(tipo_ctor, array);
     arraygraph.remove_edge(3, 4);
     expect(arraygraph.neighbors_of(3)).toEqual([2,8]);
@@ -73,7 +73,7 @@ describe('NDArrayGraph Tests', function(){
   it("should add arcs", function(){
     type tipo = Int32Array;
     var tipo_ctor = Int32Array;
-    var array: NDArray<tipo> = new NDArray(tipo_ctor, null, [2, 5]);
+    var array: NDArray<tipo> = new NDArray(tipo_ctor, [2, 5]);
     var arraygraph: NDArrayGraph<tipo> = new NDArrayGraph(tipo_ctor, array);
     arraygraph.remove_edge(3, 4);
     arraygraph.add_edge(3, 4);

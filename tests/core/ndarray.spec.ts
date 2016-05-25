@@ -5,7 +5,7 @@ import zeros   = at.zeros;
 import ones    = at.ones;
 import eye     = at.eye;
 describe('NDArray tests', ()=>{
-  var emptyarray:NDArray<Int32Array> = new NDArray(Int32Array,null,[2, 3]);
+  var emptyarray:NDArray<Int32Array> = new NDArray(Int32Array,[2, 3]);
   it("should have proper dimension", function(){
     expect(emptyarray.dim).toBe(2);
   });

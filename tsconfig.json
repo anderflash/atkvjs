@@ -14,7 +14,8 @@
   "files":[
     "src/core/ndarray.ts",
     "src/core/typedarray.ts",
-    "src/core/ndarraygraph.ts"
+    "src/core/ndarraygraph.ts",
+    "src/core/ndarraygraphweighted.ts"
   ]
 
   // "exclude":[

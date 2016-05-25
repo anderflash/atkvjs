@@ -54,8 +54,8 @@ module at {
      */
     constructor(
       private ctor: TypedArrayConstructor<TypedArray<T>>,
-      bufferOrArray: ArrayLike<number> | ArrayBuffer,
       data_size    : Array<number>,
+      bufferOrArray: ArrayLike<number> | ArrayBuffer = null,
       default_value: any = null)
     {
       // Getting the dimension
@@ -147,7 +147,7 @@ module at {
           
         }
       }
-      var subarray:NDArray<T> = new NDArray(this.ctor, this.buffer, this.size);
+      var subarray:NDArray<T> = new NDArray(this.ctor, this.size,);
 
       return subarray;
     }
@@ -190,7 +190,7 @@ module at {
     ctor: TypedArrayConstructor<TypedArray<T>>, 
     size: Array<number>, dtype: any = null): NDArray<T> 
   {
-    return new NDArray(ctor, null, size, 0);
+    return new NDArray(ctor, size, null, 0);
   }
   /**
    * @brief      Create
@@ -203,7 +203,7 @@ module at {
   export function ones<T extends TypedArray<T>>(
     ctor: TypedArrayConstructor<TypedArray<T>>,
     size: Array<number>, dtype: any = null): NDArray<T> {
-    return new NDArray(ctor, null, size, 1);
+    return new NDArray(ctor, size, null, 1);
   }
   export function eye<T extends TypedArray<T>>(
     ctor: TypedArrayConstructor<TypedArray<T>>, 
